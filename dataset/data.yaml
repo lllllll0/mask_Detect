@@ -1,0 +1,5 @@
+
+train: ./images/train # 训练集图片路径
+val: ./images/val    # 验证集图片路径
+nc: 2  # 类别数
+names: ['mask','no-mask']

@@ -1,0 +1,31 @@
+# mask_Detect/docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .                # 构建上下文：项目根目录
+      dockerfile: code/docker/Dockerfile
+    container_name: mask-backend
+    ports:
+      - "8000:8000"            # 主机:容器
+    networks:
+      - mask-net
+    restart: unless-stopped # 重启策略：除非手动停止，否则容器异常退出时自动重启
+
+  frontend:
+    build:
+      context: ./frontend       # 构建上下文：frontend 目录
+      dockerfile: Dockerfile    # 文件在 frontend/ 下
+    container_name: mask-frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend                 # 启动顺序：先启 backend
+    networks:
+      - mask-net
+    restart: unless-stopped
+
+networks:
+  mask-net:
+    driver: bridge

@@ -1,0 +1,27 @@
+# 数据相关（排除原始和处理后的图片/标注）
+
+dataset/images/
+dataset/labels/
+
+
+# Python环境
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# 训练日志和临时文件
+runs/  # Ultralytics默认训练日志路径
+*.log
+tmp/
+logs/
+
+# Docker相关（避免上传镜像、容器配置等冗余文件）
+*.tar
+*.tar.gz
+docker-compose.override.yml
+.idea/  # 若使用PyCharm，排除IDE配置
+
+# 敏感配置
+.env
