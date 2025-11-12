@@ -6,7 +6,7 @@ urllib3>=1.26.0
 
 #后端
 fastapi==0.120.1
-numpy==1.26.4
+numpy>=1.21.0,<2.0
 onnx==1.19.1
 onnxruntime==1.23.2
 onnxruntime_extensions==0.14.0
