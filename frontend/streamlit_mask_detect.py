@@ -9,8 +9,8 @@ from urllib.parse import urljoin  #拼接接口地址
 
 
 # ---------------------- 配置项（与后端严格匹配，需根据实际部署调整） ----------------------
-#后端服务地址,本地测试用localhost，部署后需要替换
-BACKEND_URL="http://backend:8000"  #本地"http://localhost:8000"
+#后端服务地址,本地测试用localhost
+BACKEND_URL="http://localhost:8000"
 image_types=['png','jpg','jpeg']
 video_types=['mp4']
 max_limit_mb=200
