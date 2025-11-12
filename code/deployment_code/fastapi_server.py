@@ -18,12 +18,8 @@ app.add_middleware(
     allow_methods=["*"],  # 允许所有请求方法
     allow_headers=["*"]  # 允许所有请求头
 )
-is_docker=os.path.exists('/.dockerenv')
-if is_docker:
-    model_path=os.path.join('/app','best.onnx')
-else:
-    model_path='../best.onnx'
-model=YOLO(model_path, task="detect")
+
+model=YOLO('../best.onnx', task="detect")
 
 output_dir="detect_results/"
 os.makedirs(output_dir,exist_ok=True)
