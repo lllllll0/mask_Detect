@@ -1,5 +1,6 @@
 # 口罩检测工具：基于YOLO的智能检测应用
 基于YOLO模型开发的口罩检测工具，支持图片/视频上传检测，部署后快速使用。
+
 (该项目目的是为学习、研究,模型训练以及检测结果若有瑕疵和问题,请多多包容)
 
 
@@ -15,6 +16,7 @@
 
 ### 前提条件
 - 安装 Python 3.9+
+- 建议安装Miniconda
 
 
 ### 部署步骤
@@ -22,24 +24,52 @@
    ```bash
    git clone https://github.com/lllllll0/mask_Detect.git
    cd mask_Detect
-   
+
 2. **安装依赖**
-    ```bash
+
+   ```bash
    pip install -r requirements.txt
+**注意:**
+当你没有正确配置 C/C++ 编译器环境时,可能是不能正常安装完依赖的
+
+因为包括 numpy 在内的部分库是用 C 语言写的库，需要 C 编译器 来构建
+
+**方案一:**
+- 使用Conda  (推荐用虚拟环境)
+- 打开 Anaconda Prompt 或 Git Bash
+- 创建新环境并安装依赖
+  ```bash
+  conda create -n mask_env python=3.11
+  conda activate mask_env
+  pip install -r requirements.txt
+
+
+**方案二:**
+
+- 不要让 pip 从源码编译！改用官方提供的 wheel 包（已编译好的 .whl 文件）
+
+  python 3.13版本估计不行,没有预编译wheel,推荐使用 Python 3.11 或 3.12
+  ```bash
+   pip install --only-binary=all -r requirements.txt
+  
 
 3. **启动服务**
-   注意:先启动后端,再运行前端
-   ```bash
-   uvicorn code.deployment_code.fastapi_server:app --host 0.0.0.0 --port 8000
-   streamlit run code.deployment_code.streamlit_mask_detect.py
 
-4. **访问服务**
+   **注意:**
+
+   先启动后端,再运行前端 (可以打开一个新的窗口,注意看好启动命令所在的目录和环境)
+   ```bash
+   cd code/deployment_code
+   uvicorn fastapi_server:app --host 0.0.0.0 --port 8000
+   streamlit run streamlit_mask_detect.py
+
+5. **访问服务**
    
     前端界面（上传检测）：http://localhost:8501
    
     后端 API 文档（调试接口）：http://localhost:8000/docs
 
-5. **停止服务**
+6. **停止服务**
    在同一个终端窗口中,按下
     ```txt
     Ctrl + C
@@ -73,7 +103,7 @@
 
 2. 执行模型转换脚本生成best.onnx并替换原来的onnx模型（或者找到该文件直接运行）:
    ```bash
-   python code/deployment_code/export_onnx.py
+   python export_onnx.py
    
 3. 重启服务
     
